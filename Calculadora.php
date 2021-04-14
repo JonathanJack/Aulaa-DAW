@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
    $op= $_POST['operacao'];
    $fat = $_POST['num3'];
    
-
+   
    if( !empty($op) ) {
       if($op == 'fatorial'){
          $c = 1;
@@ -20,23 +20,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          }
 
       }
-
-      if($op == '+')
-         $c = $a + $b;
-      else if($op == '-')
-         $c = $a - $b;
-      else if($op == '*')
-         $c = $a*$b;
       else{
-         if($b != 0){
-            $c = $a/$b;
-         }
-         else{  
-            echo "não pode ser feita divisão por 0";
-            return;
-         }
-         
-      }
+         if(($a == "") && ($b == ""))
+            $c = "Digite algum valor a ser calculado";
+         else{
+            if($op == '+')
+               $c = $a + $b;
+            else if($op == '-')
+               $c = $a - $b;
+            else if($op == '*')
+               $c = $a*$b;
+            else{
+               if($b != 0){
+                  $c = $a/$b;
+               }
+               else{  
+                  $c =  "não pode ser feita divisão por 0";
+
+               }
+            }  
+         }          
+      }  
       
    }
 
@@ -45,6 +49,51 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>  
 
 <html lang = "pt-br">
+
+<head>
+   <title>Exemplo</title>
+   <meta charset = "UTF-8">
+</head>
+<body class="fundo">
+<section>
+  <div class="Orbit">
+    <div class="Electron"></div>
+    <div class="Electron2"></div>
+  </div>
+</section>
+<div class="centraliza">
+   <div class="bloco-form">
+      <form action="" method="post" >
+
+      <div>
+         Primeiro Número: <input name="num1" type="text">
+      </div>
+      <div>
+         Segundo  Número: <input name="num2" type="text">
+      </div>
+         
+      <div class="area-botoes">
+         <input type="submit" name="operacao" value="+">     
+         <input type="submit" name="operacao" value="-">     
+         <input type="submit" name="operacao" value="*">     
+         <input type="submit" name="operacao" value="/">     
+      </div>
+
+      <div class="area-fatorial">
+         <input type="submit" name="operacao" value="fatorial">
+         <input name="num3" type="text">
+      </div>
+
+      <div class="area-resultado">      
+         <input readonly value="<?php echo $c ?>"></input>
+      </div>
+      </form> 
+   </div>
+</div>
+     
+</body>
+
+
 <style>
 
 .Orbit{
@@ -143,7 +192,7 @@ border-radius: 50%;
    }
 
    .area-fatorial{
-      margin: 25px 0px;
+      margin: 25px 30px;
    }
 
    .area-fatorial div:first-child{
@@ -168,46 +217,5 @@ border-radius: 50%;
 }
 </style>
 
-<head>
-   <title>Exemplo</title>
-   <meta charset = "UTF-8">
-</head>
-<body class="fundo">
-<section>
-  <div class="Orbit">
-    <div class="Electron"></div>
-    <div class="Electron2"></div>
-  </div>
-</section>
-<div class="centraliza">
-   <div class="bloco-form">
-      <form action="" method="post" >
 
-      <div>
-         Primeiro Número: <input name="num1" type="text">
-      </div>
-      <div>
-         Segundo  Número: <input name="num2" type="text">
-      </div>
-         
-      <div class="area-botoes">
-         <input type="submit" name="operacao" value="+">     
-         <input type="submit" name="operacao" value="-">     
-         <input type="submit" name="operacao" value="*">     
-         <input type="submit" name="operacao" value="/">     
-      </div>
-
-      <div class="area-fatorial">
-         <input type="submit" name="operacao" value="fatorial">
-         <input name="num3" type="text">
-      </div>
-
-      <div class="area-resultado">      
-         <input readonly value="<?php echo $c ?>"></input>
-      </div>
-      </form> 
-   </div>
-</div>
-     
-</body>
 </html>
